@@ -1,0 +1,6 @@
+[functions]
+verify_jwt = false
+
+[functions.make-server-60c5a920]
+verify_jwt = false
+
