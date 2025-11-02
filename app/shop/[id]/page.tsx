@@ -427,45 +427,7 @@ export default function ProductDetailPage() {
       </div>
 
       {/* Mobile Bottom Navigation */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-50 pb-safe">
-        <div className="grid grid-cols-5 gap-1 p-2">
-          <button
-            onClick={() => router.push("/shop")}
-            className="flex flex-col items-center gap-1 py-2"
-          >
-            <ShoppingCart className="w-5 h-5 text-[#3C6E47]" />
-            <span className="text-xs text-gray-600">Shop</span>
-          </button>
-          <button className="flex flex-col items-center gap-1 py-2">
-            <Search className="w-5 h-5 text-gray-600" />
-            <span className="text-xs text-gray-600">Search</span>
-          </button>
-          <button className="flex flex-col items-center gap-1 py-2">
-            <User className="w-5 h-5 text-gray-600" />
-            <span className="text-xs text-gray-600">Account</span>
-          </button>
-          {/* <button className="flex flex-col items-center gap-1 py-2">
-            <Heart
-              className={`w-5 h-5 ${
-                wishlist.length > 0 ? "fill-red-500 text-red-500" : "text-gray-600"
-              }`}
-            />
-            <span className="text-xs text-gray-600">Wishlist</span>
-          </button> */}
-          <button
-            onClick={() => router.push("/checkout")}
-            className="flex flex-col items-center gap-1 py-2 relative"
-          >
-            <ShoppingCart className="w-5 h-5 text-gray-600" />
-            {cartItemCount > 0 && (
-              <span className="absolute top-1 right-4 bg-[#3C6E47] text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
-                {cartItemCount}
-              </span>
-            )}
-            <span className="text-xs text-gray-600">Cart</span>
-          </button>
-        </div>
-      </div>
+      
     </div>
   );
 }
