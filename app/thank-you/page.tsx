@@ -1,11 +1,12 @@
 "use client";
 
+import { Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Button } from "../../components/ui/button";
 import { Card } from "../../components/ui/card";
 import { CheckCircle, Home, Package } from "lucide-react";
 
-export default function ThankYouPage() {
+function ThankYouContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const orderId = searchParams.get("orderId");
@@ -101,5 +102,20 @@ export default function ThankYouPage() {
         </div>
       </Card>
     </div>
+  );
+}
+
+export default function ThankYouPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-[#F8F8F8] flex items-center justify-center px-4 py-12">
+        <Card className="max-w-2xl w-full p-8 text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#3C6E47] mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
+        </Card>
+      </div>
+    }>
+      <ThankYouContent />
+    </Suspense>
   );
 }

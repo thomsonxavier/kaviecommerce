@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "../../components/ui/button";
 import { Card } from "../../components/ui/card";
@@ -21,7 +21,7 @@ import { ImageWithFallback } from "../../components/figma/ImageWithFallback";
 import { projectId, publicAnonKey } from "../../utils/supabase/info";
 import { Header } from "../../components/Header";
 
-export default function ShopPage() {
+function ShopContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [filterOpen, setFilterOpen] = useState(false);
@@ -386,5 +386,22 @@ export default function ShopPage() {
         </div>
       </div> */}
     </div>
+  );
+}
+
+export default function ShopPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-[#F8F8F8]">
+        <Header />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="flex justify-center">
+            <Skeleton className="h-12 w-full max-w-md" />
+          </div>
+        </div>
+      </div>
+    }>
+      <ShopContent />
+    </Suspense>
   );
 }

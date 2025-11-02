@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
@@ -11,7 +11,7 @@ import { createClient } from "@supabase/supabase-js";
 import { projectId, publicAnonKey } from "../../utils/supabase/info";
 import { useStore } from "../../store/useStore";
 
-export default function LoginPage() {
+function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { setUser } = useStore();
@@ -162,7 +162,7 @@ export default function LoginPage() {
 
         <div className="mt-6 text-center text-sm text-gray-600">
           <p>
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             <button
               onClick={() => router.push("/signup")}
               className="text-[#3C6E47] hover:underline"
@@ -173,5 +173,20 @@ export default function LoginPage() {
         </div>
       </Card>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gradient-to-br from-[#F8F8F8] to-[#F4E9D8] flex items-center justify-center">
+        <Card className="p-8 text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#3C6E47] mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
+        </Card>
+      </div>
+    }>
+      <LoginForm />
+    </Suspense>
   );
 }
